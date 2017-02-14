@@ -1,0 +1,182 @@
+/*body{*/
+    /*background-color: #faf9f5;*/
+/*}*/
+body{
+    font-family: 'Abel';
+    color: #61413f;
+}
+
+input[type=button]{
+    font-family: 'Abel';
+}
+
+
+#addUserBtn{
+    padding: 10px;
+    margin-left: 20px;
+    background-color: white;
+    border: 2px #96878e solid;
+    border-radius: 10px;
+    color: #98878f;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 300ms,color 300ms,border 300ms;
+}
+#addUserBtn:hover{
+    color: white;
+    background-color: #96878e;
+    border: 2px #61413f solid;
+
+}
+/***********************form slideshow*************************/
+#formStyle{
+    position: fixed;
+    width:50%;
+    margin-left: 25%;
+    padding: 30px 20px 10px 20px;
+    background-color: rgba(224, 213, 207, 0.96);
+    border-radius: 10px;
+    color: #773340;
+    display: none;
+    margin-top: 100px;
+    z-index: 1;
+    -webkit-box-shadow: 1px 2px 6px 1px rgba(0,0,0,0.16) ;
+    box-shadow: 1px 2px 6px 1px rgba(0,0,0,0.16) ;
+}
+.formStyleHeading{
+    font-weight: bold;
+    border-bottom: 2px solid #773340;
+    font-size: 20px;
+    padding-bottom: 3px;
+    margin-bottom: 10px;
+}
+
+.formStyleHeading input{
+    float: right;
+    background-color: #773340;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+#formStyle .inputContainer{
+    display: block;
+    padding: 10px;
+}
+#formStyle label>span{
+    width: 100px;
+    font-weight: bold;
+    float: left;
+    padding-top: 8px;
+}
+
+#formStyle .input-field{
+    width: 70%;
+    border: 1px solid #C2C2C2;
+    box-shadow: 1px 1px 4px #EBEBEB;
+    -moz-box-shadow: 1px 1px 4px #EBEBEB;
+    -webkit-box-shadow: 1px 1px 4px #EBEBEB;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    padding: 7px;
+}
+#formStyle .input-field:focus{
+    border: 1px solid #0C0;
+}
+
+#formStyle .inputContainer input[type=button] {
+    width: 74%;
+    background-color: #773340;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+.formAlert{
+    display: none;
+}
+
+
+
+/**********************table*************************/
+#allUsers{
+    padding: 20px;
+    text-align: center;
+}
+#allUsers input[type=text]{
+    background-image: url("search.png");
+    background-position: 4px 4px;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    width: 50%;
+    /*font-size: 16px;*/
+    padding: 8px 20px 8px 40px;
+    border: 2px solid #ddd;
+    margin-bottom: 12px;
+}
+
+#myTable{
+    font-family: 'Abel';
+    border-collapse: collapse;
+    text-align: center;
+    width: 100%;
+}
+
+#myTable td, #myTable th{
+    padding: 10px 20px;
+    border-bottom:1px #773340 solid;
+}
+
+#myTable th{
+    color: white;
+    background-color: #97868e;
+    border-top: 1px #773340 solid;
+}
+#myTable input[type=button]{
+    margin: 5px 5px;
+    border: none;
+    border-radius: 10%;
+    color: white;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: background-color 300ms;
+}
+
+#myTable input.viewBtn{
+    background-color: #5db85d;
+}
+#myTable input.viewBtn:hover{
+    background-color: #4e9b4e;
+}
+#myTable input.editBtn{
+    background-color: #f0ad4f;
+}
+#myTable input.editBtn:hover{
+    background-color: #da8e3b;
+}
+#myTable input.deleteBtn{
+    background-color: #c8312d;
+
+}
+#myTable input.deleteBtn:hover{
+    background-color: #9b2623;
+}
+.moreInfo:active{
+    background-color: red;
+}
+@media screen and (max-width: 814px) {
+    #formStyle .inputContainer input[type=button] {
+        width: 100%;
+    }
+    #formStyle .input-field{
+        width: 95%;
+    }
+    #allUsers input[type=text]{
+        width: 80%;
+    }
+}

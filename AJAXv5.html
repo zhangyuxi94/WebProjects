@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="AJAXv5.css" type="text/css" rel="stylesheet"/>
+    <link href='//fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="wrapper">
+    <div id="formStyle">
+            <div class="formStyleHeading">Add New User Here<input id="removePop" type="button" value="x"/></div>
+            <form action="" method="post">
+                <div class="inputContainer">
+                    <label for="name"><span>Name</span></label>
+                    <input type="text" id="name" class="input-field" value="" placeholder="Please enter your name"/>
+                    <label for="nameAlert"><span></span></label>
+                    <div id="nameAlert" class="formAlert">Please fill out the name!</div>
+                </div>
+                <div class="inputContainer">
+                    <label for="email"><span>Email</span></label>
+                    <input type="text" id="email" class="input-field" value=""  placeholder="Please enter your email"/>
+                    <label for="emailAlert"><span></span></label>
+                    <div id="emailAlert" class="formAlert">Please fill out the email!</div>
+                </div>
+                <div class="inputContainer">
+                    <label for="location"><span>Location</span></label>
+                    <input type="text" id="location" class="input-field" value="" placeholder="Please enter your location"/>
+                    <label for="locationAlert"><span></span></label>
+                    <div id="locationAlert" class="formAlert">Please fill out the location!</div>
+                </div>
+                <div class="inputContainer">
+                    <label for="phone"><span>Phone</span></label>
+                    <input type="text" id="phone" class="input-field" value="" placeholder="Please enter your phone number"/>
+                    <label for="phoneAlert"><span></span></label>
+                    <div id="phoneAlert" class="formAlert">Please fill out the phone number!</div>
+                </div>
+                <div class="inputContainer">
+                    <label for="submitBtn"><span></span></label>
+                    <input type="button" value="Submit" id="submitBtn"/>
+                </div>
+            </form>
+        </div>
+    <div id="allUsers">
+        <h2>All Users<input type="button" id="addUserBtn" value="Add New User"/></h2>
+        <input type="text" placeholder="Search Here..." id="searchBar"/>
+    </div>
+</div>
+<script src="AJAXv5.js"></script>
+</body>
+</html>
