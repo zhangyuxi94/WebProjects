@@ -2,17 +2,19 @@
     //get data from json file
     var namebook=[];
     var xhttp=new XMLHttpRequest();
-    xhttp.onreadystatechange=function(){
-        if(xhttp.readyState==4&&xhttp.status==200){
-            namebook=xhttp.responseText;
-            if(localStorage.getItem("namebook")===null){
+    if(localStorage.getItem("namebook")===null){
+        xhttp.onreadystatechange=function(){
+            if(xhttp.readyState==4&&xhttp.status==200){
+                namebook=xhttp.responseText;
                 localStorage.setItem("namebook",namebook);
+                createTable();
             }
-            createTable();
-        }
-    };
-    xhttp.open("GET","dataStorage.json",true);
-    xhttp.send();
+        };
+        xhttp.open("GET","dataStorage.json",true);
+        xhttp.send();
+    }else{
+        createTable();
+    }
 
     // create first table
     function createTable(){
@@ -82,31 +84,23 @@
     // add new user slide down
     var addUserBtn=document.getElementById("addUserBtn");
     var ifShow=false;
+    var ifNew=true;
     addUserBtn.addEventListener("click",function(){
+        ifNew=true;
             if(ifShow===false){
                 jQuery("#formStyle").fadeIn();
                 document.getElementById("name").value="";
                 document.getElementById("email").value="";
                 document.getElementById("location").value="";
                 document.getElementById("phone").value="";
-                //add new user function
-                document.getElementById("submitBtn").addEventListener("click",function(){
-                    var nameInput=document.getElementById("name").value;
-                    var emailInput=document.getElementById("email").value;
-                    var locationInput=document.getElementById("location").value;
-                    var phoneInput=document.getElementById("phone").value;
-                    if(nameInput==""||emailInput==""||locationInput==""||phoneInput==""){
-                        validation(nameInput,emailInput,locationInput,phoneInput);
-                    }else{
-                        addUser(nameInput,emailInput,locationInput,phoneInput,"new",-1);
-                    }
-                });
                 ifShow=true;
             }else{
                 jQuery("#formStyle").fadeOut();
                 ifShow=false;
             }
         });
+    //add new user function
+
     document.getElementById("removePop").addEventListener("click",function(){
         jQuery("#formStyle").fadeOut();
         ifShow=false;
@@ -114,6 +108,8 @@
 
     //editUser
     function editUser(index){
+        ifNew=false;
+        console.log(ifNew);
         if(ifShow===false){
             jQuery("#formStyle").fadeIn();
             var allNameStr1=localStorage.getItem("namebook");
@@ -123,23 +119,45 @@
             document.getElementById("email").value=userInfo.Email;
             document.getElementById("location").value=userInfo.location;
             document.getElementById("phone").value=userInfo.phone;
-            document.getElementById("submitBtn").addEventListener("click",function(){
-                var nameInput=document.getElementById("name").value;
-                var emailInput=document.getElementById("email").value;
-                var locationInput=document.getElementById("location").value;
-                var phoneInput=document.getElementById("phone").value;
-                if(nameInput==""||emailInput==""||locationInput==""||phoneInput==""){
-                    validation(nameInput,emailInput,locationInput,phoneInput);
-                }else{
-                    addUser(nameInput,emailInput,locationInput,phoneInput,"edit",index);
-                }
-            });
+            document.getElementById("submitBtn").title=index;
+            // document.getElementById("submitBtn").addEventListener("click",function(){
+            //     var nameInput=document.getElementById("name").value;
+            //     var emailInput=document.getElementById("email").value;
+            //     var locationInput=document.getElementById("location").value;
+            //     var phoneInput=document.getElementById("phone").value;
+            //     if(nameInput==""||emailInput==""||locationInput==""||phoneInput==""){
+            //         validation(nameInput,emailInput,locationInput,phoneInput);
+            //     }else{
+            //         console.log(index);
+            //         addUser(nameInput,emailInput,locationInput,phoneInput,"edit",index);
+            //     }
+            // });
             ifShow=true;
         }else{
             jQuery("#formStyle").fadeOut();
+            ifNew=true;
             ifShow=false;
         }
     }
+
+        document.getElementById("submitBtn").addEventListener("click",function(){
+            var nameInput=document.getElementById("name").value;
+            var emailInput=document.getElementById("email").value;
+            var locationInput=document.getElementById("location").value;
+            var phoneInput=document.getElementById("phone").value;
+            if(nameInput==""||emailInput==""||locationInput==""||phoneInput==""){
+                validation(nameInput,emailInput,locationInput,phoneInput);
+            }else{
+                if(ifNew===true){
+                    addUser(nameInput,emailInput,locationInput,phoneInput,"new",-1);
+                }
+                else{
+                    var index=document.getElementById("submitBtn").getAttribute("title");
+                    addUser(nameInput,emailInput,locationInput,phoneInput,"edit",index);
+                }
+            }
+        });
+
     //deleteUser
     function deleteUser(index){
         var allNameStr1=localStorage.getItem("namebook");
@@ -148,7 +166,11 @@
         var allNameStr=JSON.stringify(allName);
         localStorage.removeItem("namebook");
         localStorage.setItem("namebook",allNameStr);
-        location.reload();
+        $("#myTable").remove();
+        jQuery("#formStyle").fadeOut();
+        ifShow=false;
+        createTable();
+
     }
     //viewUser
     var isViewed=false;
@@ -208,13 +230,17 @@
         };
         if(type=="edit"){
             allName.splice(index,1,newUser);
+            console.log(allName);
         }else if(type==="new"){
             allName.push(newUser);
         }
         var allNameStr=JSON.stringify(allName);
         localStorage.removeItem("namebook");
         localStorage.setItem("namebook",allNameStr);
-        location.reload();
+        $("#myTable").remove();
+        jQuery("#formStyle").fadeOut();
+        ifShow=false;
+        createTable();
     }
 
     function validation(nameInput,emailInput,locationInput,phoneInput){
